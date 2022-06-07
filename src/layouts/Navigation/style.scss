@@ -1,0 +1,108 @@
+@import '../../assets/styles/base/variables';
+@import '../../assets/styles/functions/mixins';
+
+nav{
+    background: $white;
+    width: 100%;
+    min-height: 10vh;
+    padding: 0 1rem;
+    @include flex(row, space-between, center);
+}
+
+#navigation-logo,
+.navigation-links,
+.navigation-actions,
+.navigation-burger{
+    flex: 1 1 40rem;
+}
+
+#navigation-logo{
+    font-size: $h2;
+}
+
+.navigation-links{
+    @include flex(row, space-between, center);
+    li a{
+        font-size: $h4;
+        color: $black;
+        transition: $transition;;
+        &:hover{
+            opacity: 0.5;
+        }
+    }
+}
+
+.navigation-actions{
+    @include flex(row, flex-end, center);
+    button{
+        margin: 0 1rem;
+    }
+}
+
+.navigation-burger{
+    width: 25px;
+    height: 25px;
+    display: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 860px) {
+    nav{
+        padding: 0 1rem;
+        position: relative;
+        overflow-x: none;
+    }
+
+    .navigation-burger{
+        display: inline-block;
+    }
+
+    #navigation-logo{
+        text-align: center;
+    }
+
+    .navigation-links{
+        background: $brown;
+        @include flex(column, space-evenly, center);
+        position: absolute;
+        top: 10vh;
+        left: 0%;
+        width: 100%;
+        height: calc(90vh / 2);
+        transform: translateX(100%);
+        transition: $transition;
+        z-index: 2;
+        &.active{
+            transform: translateX(0%);
+        }
+        li a{
+            color: $white;
+            transition: $transition;;
+            &:hover{
+                opacity: 0.75;
+            }
+        }
+    }
+
+    .navigation-actions{
+        background: $brown;
+        @include flex(column, flex-end, center);
+        position: absolute;
+        top: 55vh;
+        left: 0%;
+        width: 100%;
+        height: calc(90vh / 2);
+        transform: translateX(100%);
+        transition: $transition;
+        z-index: 2;
+        button{
+            flex-grow: 0;
+            width: 80%;
+            margin: 1rem 0;
+        }
+        &.active{
+            transform: translateX(0%);
+        }
+    }
+
+}
