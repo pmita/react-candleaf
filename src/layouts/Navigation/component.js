@@ -33,9 +33,9 @@ const Navigation = () => {
             <ul 
                 className={isHidden ? 'navigation-links' : 'navigation-links active'}
             >
-                <li><Link to='/'>Products</Link></li>
-                <li><Link to='/'>Our Story</Link></li>
-                <li><Link to='/'>Contact Us</Link></li>
+                <li><Link to='/products'>Products</Link></li>
+                <li><Link to='/our-story'>Our Story</Link></li>
+                <li><Link to='/contact-us'>Contact Us</Link></li>
             </ul>
 
             <ul 
