@@ -50,6 +50,7 @@ nav{
     nav{
         padding: 0 1rem;
         position: relative;
+        overflow-x: none;
     }
 
     .navigation-burger{
@@ -70,6 +71,7 @@ nav{
         height: calc(90vh / 2);
         transform: translateX(100%);
         transition: $transition;
+        z-index: 2;
         &.active{
             transform: translateX(0%);
         }
@@ -92,6 +94,7 @@ nav{
         height: calc(90vh / 2);
         transform: translateX(100%);
         transition: $transition;
+        z-index: 2;
         button{
             flex-grow: 0;
             width: 80%;
