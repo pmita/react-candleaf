@@ -1,0 +1,70 @@
+@import '../../assets/styles/functions/mixins';
+@import '../../assets/styles/base/variables';
+
+.banner-section{
+    min-height: 90vh;
+    width: 100%;
+    background: red;
+    @include flex(row, center, stretch);
+    flex-wrap: wrap;
+}
+
+.banner-left{
+    flex: 2 1 45rem;
+}
+
+.banner-right{
+    flex: 1 1 45rem;
+}
+
+.banner-left{
+    background: green;
+    background-image: url(../../assets/images/banner-image.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner-right{
+    background: $brown;
+    @include flex(column, center, flex-start);
+    padding: 5rem;
+    h4{
+        max-width: 500px;
+        padding-top: 2.5rem;
+    }
+}
+
+.banner-actions{
+    margin-top: 4rem;
+    align-self: stretch;
+    @include flex(row, center, stretch);
+    button{
+        flex: 1;
+        &:nth-child(1){
+            margin-right: 1rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .banner-left{
+        order: 2;
+    }
+
+    .banner-right{
+        order: 1;
+    }
+
+    .banner-actions{
+        padding: 0 1rem;
+        @include flex(column, center, stretch);
+        button{
+            flex: 1;
+            &:nth-child(1){
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}

@@ -1,9 +1,14 @@
 import React from 'react';
+//COMPONENTS
+import Banner from '../../layouts/Banner/component';
+//STYLES
 import './style.scss';
 
 const Home = () => {
     return(
-        <h1>Welcome to Home Page</h1>
+        <>
+            <Banner />
+        </>
     );
 }
 
