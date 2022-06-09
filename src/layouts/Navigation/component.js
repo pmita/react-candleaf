@@ -41,8 +41,12 @@ const Navigation = () => {
             <ul 
                 className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
             >
-                <button className='btn primary'>Login</button>
-                <button className='btn secondary'>Sign Up</button>
+                <button className='btn primary'>
+                    <Link to='/signin'>Login</Link>
+                </button>
+                <button className='btn secondary'>
+                    <Link to='/signup'>Sign Up</Link>
+                </button>
             </ul>
         </nav>
     )

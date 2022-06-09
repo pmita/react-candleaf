@@ -17,7 +17,6 @@
 }
 
 .banner-left{
-    background: green;
     background-image: url(../../assets/images/banner-image.jpg);
     @include position(center, no-repeat, cover);
 }
