@@ -1,9 +1,7 @@
 //ROUTER
 import { Link } from 'react-router-dom';
 //ASSETS
-import CandleImageOne from '../../assets/images/candle-image-one.jpg';
-import CandleImageTwo from '../../assets/images/candle-image-two.jpg';
-import BodyCandle from '../../assets/images/body-candle.jpg'
+import { OurStoryImages } from '../../assets/variables/OurStoryImages';
 import './style.scss';
 
 const OurStoryPreview = () => {
@@ -24,9 +22,13 @@ const OurStoryPreview = () => {
                 </Link>
             </div>
             <div className='ourStory-right'>
-                <img src={BodyCandle} alt='body shaped candle on fire' />
-                <img src={CandleImageOne} alt='canldeaf candle on top of a white background' />
-                <img src={CandleImageTwo} alt='candleaf candle on top of desk background' />
+                {OurStoryImages && OurStoryImages.map(image => (
+                    <img 
+                        key={image.id}
+                        src={image.img_href} 
+                        alt={image.altText}
+                    />
+                ))}
             </div>
         </div>
     );
