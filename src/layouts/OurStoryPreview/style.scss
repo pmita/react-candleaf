@@ -1,0 +1,57 @@
+@import '../../assets/styles/base/variables';
+@import '../../assets/styles/functions/mixins';
+
+.ourStory-preview{
+    min-height: 60vh;
+    width: 100%;
+    background: $grey;
+    @include flex(row, center, stretch);
+}
+
+.ourStory-left,
+.ourStory-right{
+    flex: 1;
+}
+
+.ourStory-left{
+    padding: 5rem;
+    @include flex(column, space-evenly, center);
+}
+
+.ourStory-right{
+    padding: 5rem;
+    @include grid((250px 250px), (250px 250px), 1rem);
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        &:nth-child(1){
+            grid-row: 1/3;
+        }
+    }
+}
+
+.ourStory-banner{
+    background: $brown;
+    padding: 2.5rem;
+    margin-bottom: 1rem;
+    h2{
+        margin-bottom: 2.5rem;
+    }
+    h2, p{
+        color: $white;
+    }
+}
+
+@media only screen and (max-width: 860px){
+    .ourStory-preview{
+        @include flex(column, center, center);
+    }
+
+    .ourStory-right{
+        grid-template-columns: 1fr;
+        grid-auto-rows: 300px;
+        gap: 1em;
+    }
+}
+

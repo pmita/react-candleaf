@@ -10,3 +10,10 @@
     background-repeat: $repeat;
     background-size: $size;
 }
+
+@mixin grid($columns, $rows, $gap: 0rem){
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+    gap: $gap;
+}
