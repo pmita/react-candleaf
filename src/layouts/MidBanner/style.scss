@@ -1,0 +1,38 @@
+@import '../../assets/styles/base/variables';
+@import '../../assets/styles/functions/mixins';
+
+.midBanner{
+    min-height: 40vh;
+    width: 100%;
+    background: $grey;
+    @include flex(row, center, stretch);
+}
+
+.midBanner-left,
+.midBanner-right{
+    flex: 1;
+}
+
+.midBanner-left{
+    padding: 5rem;
+    @include flex(column, center, flex-start);
+    h2{
+        padding: 2.5rem 0;
+    }
+    p{
+        padding: 2rem 0;
+    }
+}
+
+.midBanner-right{
+    width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 860px){
+    .midBanner{
+        @include flex(column, center, stretch);
+    }
+}
+
