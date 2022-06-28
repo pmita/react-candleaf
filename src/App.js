@@ -1,7 +1,10 @@
-//COMPONENTS
-import Navigation from "./layouts/Navigation/component";
-//PAGES
-import Home from "./pages/Home";
+import React from 'react';
+// ROUTER
+import { Routes, Route } from 'react-router-dom';
+// COMPONENTS
+import Navigation from './layouts/Navigation/component';
+// PAGES
+import Home from './pages/Home';
 import Products from './pages/Products';
 import OurStory from './pages/OurStory';
 import ContactUs from './pages/ContactUs';
