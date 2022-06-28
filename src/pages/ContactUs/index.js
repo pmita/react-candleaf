@@ -1,3 +1,3 @@
-import ContactUs from "./component";
+import ContactUs from './component';
 
 export default ContactUs;
