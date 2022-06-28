@@ -1,3 +1,3 @@
-import MidBanner from "./component";
+import MidBanner from './component';
 
 export default MidBanner;

@@ -1,3 +1,3 @@
-import Brands from "./component";
+import Brands from './component';
 
 export default Brands;

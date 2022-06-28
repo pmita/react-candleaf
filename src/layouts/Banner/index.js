@@ -1,3 +1,3 @@
-import Banner from "./component";
+import Banner from './component';
 
 export default Banner;
