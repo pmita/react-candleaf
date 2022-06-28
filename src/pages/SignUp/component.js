@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+// HOOKS
+import { useSignUp } from '../../hooks/useSignUp';
 // STYLES
 import './style.scss';
 
@@ -9,12 +11,15 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { error, isPending, signup } = useSignUp();
 
   // EVENTS
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password, username);
+    signup(email, password, username);
   };
+
+  console.log(error, isPending);
   return (
     <div className="signup-page">
       <div className="signup-filler" />
