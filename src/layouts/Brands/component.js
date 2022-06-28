@@ -1,6 +1,6 @@
 import React from 'react';
 // ASSETS
-import { BrandLogos } from '../../assets/variables/BrandLogos';
+import BrandLogos from '../../assets/variables/BrandLogos';
 // STYLES
 import './style.scss';
 
