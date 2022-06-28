@@ -1,0 +1,46 @@
+@import '../../assets/styles/base/variables';
+@import '../../assets/styles/functions/mixins';
+
+.signup-page{
+    min-height: 90vh;
+    width: 100%;
+    @include flex(row, center, stretch);
+}
+
+.signup-filler,
+.signup-content{
+    flex: 1;
+}
+
+.signup-filler{
+    background-image: url('../../assets/images/signup-background-image.jpg');
+    @include position(center, no-repeat, cover);
+}
+
+.signup-content{
+    background: $grey;
+    @include flex(column, center, stretch);
+    h2{
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    form, label{
+        @include flex(column, flex-start, stretch);
+    }
+    form{
+        padding: 0 2.5rem;
+    }
+
+    label{
+        margin: 1rem 0;
+    }
+    button{
+        margin-top: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .signup-filler{
+        display: none;
+    }
+}

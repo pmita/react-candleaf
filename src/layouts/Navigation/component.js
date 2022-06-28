@@ -37,15 +37,18 @@ function Navigation() {
         <li><Link to="/our-story">Our Story</Link></li>
         <li><Link to="/contact-us">Contact Us</Link></li>
       </ul>
-
-      <ul
-        className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
-      >
-        <button className="btn primary" type="button">Login</button>
-        <button className="btn secondary" type="button">Sign Up</button>
-      </ul>
-    </nav>
-  );
+            <ul 
+                className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
+            >
+                <button className='btn primary'>
+                    <Link to='/signin'>Login</Link>
+                </button>
+                <button className='btn secondary'>
+                    <Link to='/signup'>Sign Up</Link>
+                </button>
+            </ul>
+        </nav>
+    )
 }
 
 export default Navigation;
