@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 // ROUTER
 import { Link } from 'react-router-dom';
@@ -37,18 +39,18 @@ function Navigation() {
         <li><Link to="/our-story">Our Story</Link></li>
         <li><Link to="/contact-us">Contact Us</Link></li>
       </ul>
-            <ul 
-                className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
-            >
-                <button className='btn primary'>
-                    <Link to='/signin'>Login</Link>
-                </button>
-                <button className='btn secondary'>
-                    <Link to='/signup'>Sign Up</Link>
-                </button>
-            </ul>
-        </nav>
-    )
+      <ul
+        className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
+      >
+        <button className="btn primary" type="button">
+          <Link to="/signin">Login</Link>
+        </button>
+        <button className="btn secondary" type="button">
+          <Link to="/signup">Sign Up</Link>
+        </button>
+      </ul>
+    </nav>
+  );
 }
 
 export default Navigation;

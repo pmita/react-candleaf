@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 // STYLES
@@ -8,12 +9,18 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // EVENTS
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password, username);
+  };
   return (
     <div className="signup-page">
       <div className="signup-filler" />
       <div className="signup-content">
         <h2>Sign Up</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>
             <span>Username</span>
             <input
