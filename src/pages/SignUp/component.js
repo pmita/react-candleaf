@@ -1,36 +1,51 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react';
+// STYLES
 import './style.scss';
 
-const SignUp = () => {
-    return(
-        <div className='signup-page'>
-            <div className='signup-filler'>
-                
-            </div>
-            <div className='signup-content'>
-                <h2>Sign Up</h2>
-                <form>
-                    <label>
-                        <span>Email</span>
-                        <input required type='email'/>
-                    </label>
-                    <label>
-                        <span>Password</span>
-                        <input required type='password'/>
-                    </label>
-                    <label>
-                        <span>Name</span>
-                        <input required type='text'/>
-                    </label>
-                    <label>
-                        <span>Last Name</span>
-                        <input required type='text'/>
-                    </label>
-                    <button className='btn primary'>Sign Up</button>
-                </form>
-            </div>
-        </div>
-    );
+function SignUp() {
+  // STATE & VARIABLES
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  return (
+    <div className="signup-page">
+      <div className="signup-filler" />
+      <div className="signup-content">
+        <h2>Sign Up</h2>
+        <form>
+          <label>
+            <span>Username</span>
+            <input
+              required
+              type="username"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+            />
+          </label>
+          <label>
+            <span>Email</span>
+            <input
+              required
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </label>
+          <label>
+            <span>Password</span>
+            <input
+              required
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+          </label>
+          <button className="btn primary" type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default SignUp;
