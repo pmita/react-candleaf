@@ -9,6 +9,7 @@ import {
   SIGN_IN_INIT,
   SIGN_IN_FAILURE,
   SIGN_IN_SUCCESS,
+  AUTH_IS_READY,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -38,6 +39,8 @@ const authReducer = (state = initialState, action) => {
     case SIGN_OUT_FAILURE:
     case SIGN_IN_FAILURE:
       return { ...state, isPending: false, error: action.payload };
+    case AUTH_IS_READY:
+      return { ...state, authIsReady: true, user: action.payload };
     default:
       return { ...state };
   }
