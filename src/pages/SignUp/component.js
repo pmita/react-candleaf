@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-// HOOKS
-import { useSignUp } from '../../hooks/useSignUp';
+// REDUX
+import { useDispatch } from 'react-redux';
+import { signUpUser } from '../../store/thunk';
 // STYLES
 import './style.scss';
 
@@ -11,12 +12,12 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signup } = useSignUp();
+  const dispatch = useDispatch();
 
   // EVENTS
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(email, password, username);
+    dispatch(signUpUser(email, password, username));
   };
 
   return (
