@@ -1,9 +1,15 @@
 // FIREBASE
 import { auth } from '../firebase/config';
+// ACTIONS
+import {
+  signupInit,
+  signUpFailure,
+  signUpSuccess,
+} from './actions/authActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
   // reset state
-  dispatch({ type: 'SIGN_UP_INIT' });
+  dispatch(signupInit());
 
   try {
     const response = await auth.createUserWithEmailAndPassword(email, password);
@@ -16,9 +22,9 @@ const signUpUser = (email, password, username) => async (dispatch) => {
       displayName: username,
     });
 
-    dispatch({ type: 'SIGN_UP_SUCCESS', payload: response.user });
+    dispatch(signUpSuccess(response.user));
   } catch (err) {
-    dispatch({ type: 'SIGN_UP_FAILURE', payload: err.message });
+    dispatch(signUpFailure(err.message));
   }
 };
 
