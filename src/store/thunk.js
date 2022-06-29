@@ -2,14 +2,17 @@
 import { auth } from '../firebase/config';
 // ACTIONS
 import {
-  signupInit,
+  signUpInit,
   signUpFailure,
   signUpSuccess,
+  signOutInit,
+  signOutFailure,
+  signOutSuccess,
 } from './actions/authActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
   // reset state
-  dispatch(signupInit());
+  dispatch(signUpInit());
 
   try {
     const response = await auth.createUserWithEmailAndPassword(email, password);
@@ -28,5 +31,18 @@ const signUpUser = (email, password, username) => async (dispatch) => {
   }
 };
 
+const signOutUser = () => async (dispatch) => {
+  // reset state
+  dispatch(signOutInit());
+
+  try {
+    await auth.signOut();
+
+    dispatch(signOutSuccess());
+  } catch (err) {
+    dispatch(signOutFailure(err.message));
+  }
+};
+
 // eslint-disable-next-line import/prefer-default-export
-export { signUpUser };
+export { signUpUser, signOutUser };

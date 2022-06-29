@@ -3,9 +3,13 @@ import {
   SIGN_UP_INIT,
   SIGN_UP_FAILURE,
   SIGN_UP_SUCCESS,
+  SIGN_OUT_INIT,
+  SIGN_OUT_FAILURE,
+  SIGN_OUT_SUCCESS,
 } from './actionTypes';
 
-const signupInit = () => ({
+// -----------SIGN UP ACTIONS
+const signUpInit = () => ({
   type: SIGN_UP_INIT,
 });
 
@@ -19,4 +23,25 @@ const signUpSuccess = (user) => ({
   payload: user,
 });
 
-export { signupInit, signUpFailure, signUpSuccess };
+// ------------SIGN OUT ACTIONS
+const signOutInit = () => ({
+  type: SIGN_OUT_INIT,
+});
+
+const signOutFailure = (err) => ({
+  type: SIGN_OUT_FAILURE,
+  payload: err,
+});
+
+const signOutSuccess = () => ({
+  type: SIGN_OUT_SUCCESS,
+});
+
+export {
+  signUpInit,
+  signUpFailure,
+  signUpSuccess,
+  signOutInit,
+  signOutFailure,
+  signOutSuccess,
+};

@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 // ROUTER
 import { Link } from 'react-router-dom';
 // REDUX
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { signOutUser } from '../../store/thunk';
 // ASSETS
 import Burger from '../../assets/images/svg/burger.svg';
 // STYLES
@@ -14,10 +15,15 @@ function Navigation() {
   // STATE & VARIABLES
   const [isHidden, setIsHidden] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   // EVENTS
   const handleClick = () => {
     setIsHidden(!isHidden);
+  };
+
+  const handleLogOut = () => {
+    dispatch(signOutUser());
   };
 
   return (
@@ -65,7 +71,7 @@ function Navigation() {
             Hey,
             {user.displayName}
           </h4>
-          <button className="btn primary" type="button">
+          <button className="btn primary" type="button" onClick={handleLogOut}>
             Log Out
           </button>
         </ul>
