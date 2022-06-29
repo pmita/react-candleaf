@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 // REDUX
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { signUpUser } from '../../store/thunk';
+// ROUTER
 // STYLES
 import './style.scss';
 
@@ -13,11 +15,13 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // EVENTS
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signUpUser(email, password, username));
+    navigate('/');
   };
 
   return (
