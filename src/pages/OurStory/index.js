@@ -1,3 +1,3 @@
-import OurStory from "./component";
+import OurStory from './component';
 
 export default OurStory;
