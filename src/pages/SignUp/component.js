@@ -11,7 +11,7 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { error, isPending, signup } = useSignUp();
+  const { signup } = useSignUp();
 
   // EVENTS
   const handleSubmit = (e) => {
@@ -19,7 +19,6 @@ function SignUp() {
     signup(email, password, username);
   };
 
-  console.log(error, isPending);
   return (
     <div className="signup-page">
       <div className="signup-filler" />
