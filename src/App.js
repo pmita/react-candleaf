@@ -8,6 +8,7 @@ import { AUTH_IS_READY } from './store/actions/actionTypes';
 import { auth } from './firebase/config';
 // COMPONENTS
 import Navigation from './layouts/Navigation/component';
+import PrivateRouteToHome from './components/PrivateRouteToHome';
 // PAGES
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -18,13 +19,13 @@ import SignUp from './pages/SignUp/component';
 
 function App() {
   // STATE & VARIABLES
-  const { authIsReady } = useSelector((state) => state.auth);
+  const { authIsReady, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   // useEFFECT
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      dispatch({ type: AUTH_IS_READY, payload: user });
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      dispatch({ type: AUTH_IS_READY, payload: authUser });
     });
 
     return () => unsubscribe();
@@ -40,8 +41,12 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/our-story" element={<OurStory />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<PrivateRouteToHome user={user} />}>
+              <Route path="signin" element={<SignIn />} />
+            </Route>
+            <Route path="/signup" element={<PrivateRouteToHome user={user} />}>
+              <Route path="/signup" element={<SignUp />} />
+            </Route>
           </Routes>
         </>
       )}
