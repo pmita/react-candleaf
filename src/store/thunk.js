@@ -9,7 +9,6 @@ const signUpUser = (email, password, username) => async (dispatch) => {
     const response = await auth.createUserWithEmailAndPassword(email, password);
 
     if (!response.user) {
-      dispatch({ type: 'SIGN_UP_FAILURE', payload: 'Sorry, could not sign up right now' });
       throw new Error('Sorry, could not sign up right now');
     }
 
