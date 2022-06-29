@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 // ROUTER
 import { Link } from 'react-router-dom';
+// REDUX
+import { useSelector } from 'react-redux';
 // ASSETS
 import Burger from '../../assets/images/svg/burger.svg';
 // STYLES
@@ -11,11 +13,13 @@ import './style.scss';
 function Navigation() {
   // STATE & VARIABLES
   const [isHidden, setIsHidden] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   // EVENTS
   const handleClick = () => {
     setIsHidden(!isHidden);
   };
+
   return (
     <nav>
       <img
@@ -39,16 +43,33 @@ function Navigation() {
         <li><Link to="/our-story">Our Story</Link></li>
         <li><Link to="/contact-us">Contact Us</Link></li>
       </ul>
-      <ul
-        className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
-      >
-        <button className="btn primary" type="button">
-          <Link to="/signin">Login</Link>
-        </button>
-        <button className="btn secondary" type="button">
-          <Link to="/signup">Sign Up</Link>
-        </button>
-      </ul>
+
+      {!user && (
+        <ul
+          className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
+        >
+          <button className="btn primary" type="button">
+            <Link to="/signin">Login</Link>
+          </button>
+          <button className="btn secondary" type="button">
+            <Link to="/signup">Sign Up</Link>
+          </button>
+        </ul>
+      )}
+
+      {user && (
+        <ul
+          className={isHidden ? 'navigation-actions' : 'navigation-actions active'}
+        >
+          <h4>
+            Hey,
+            {user.displayName}
+          </h4>
+          <button className="btn primary" type="button">
+            Log Out
+          </button>
+        </ul>
+      )}
     </nav>
   );
 }
