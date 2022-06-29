@@ -6,6 +6,9 @@ import {
   SIGN_OUT_INIT,
   SIGN_OUT_FAILURE,
   SIGN_OUT_SUCCESS,
+  SIGN_IN_INIT,
+  SIGN_IN_FAILURE,
+  SIGN_IN_SUCCESS,
 } from './actionTypes';
 
 // -----------SIGN UP ACTIONS
@@ -37,6 +40,21 @@ const signOutSuccess = () => ({
   type: SIGN_OUT_SUCCESS,
 });
 
+// ------------SIGN IN ACTIONS
+const signInInit = () => ({
+  type: SIGN_IN_INIT,
+});
+
+const signInFailure = (err) => ({
+  type: SIGN_IN_FAILURE,
+  payload: err,
+});
+
+const signInSuccess = (user) => ({
+  type: SIGN_IN_SUCCESS,
+  payload: user,
+});
+
 export {
   signUpInit,
   signUpFailure,
@@ -44,4 +62,7 @@ export {
   signOutInit,
   signOutFailure,
   signOutSuccess,
+  signInInit,
+  signInFailure,
+  signInSuccess,
 };

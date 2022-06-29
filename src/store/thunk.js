@@ -8,6 +8,9 @@ import {
   signOutInit,
   signOutFailure,
   signOutSuccess,
+  signInInit,
+  signInFailure,
+  signInSuccess,
 } from './actions/authActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
@@ -44,5 +47,26 @@ const signOutUser = () => async (dispatch) => {
   }
 };
 
+const signInUser = (email, password) => async (dispatch) => {
+  // reset state
+  dispatch(signInInit());
+
+  try {
+    const response = await auth.signInWithEmailAndPassword(email, password);
+
+    if (!response.user) {
+      throw new Error('Sorry, could not sign in right now');
+    }
+
+    dispatch(signInSuccess(response.user));
+  } catch (err) {
+    dispatch(signInFailure(err.message));
+  }
+};
+
 // eslint-disable-next-line import/prefer-default-export
-export { signUpUser, signOutUser };
+export {
+  signUpUser,
+  signOutUser,
+  signInUser,
+};

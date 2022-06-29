@@ -1,5 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+// REDUX
+import { useDispatch } from 'react-redux';
+import { signInUser } from '../../store/thunk';
 // STYLES
 import './style.scss';
 
@@ -7,12 +10,12 @@ function SignIn() {
   // STATE & VARIABLES
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   // EVENTS
   const handleSubmit = (e) => {
     e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(email, password);
+    dispatch(signInUser(email, password));
   };
 
   return (
