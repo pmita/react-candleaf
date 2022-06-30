@@ -1,11 +1,8 @@
 /* eslint-disable no-console */
-
 import React, { useState } from 'react';
-// ROUTER
-import { useNavigate } from 'react-router-dom';
 // REDUX
-import { useDispatch } from 'react-redux';
-import { signUpUser } from '../../store/thunk';
+// import { useDispatch } from 'react-redux';
+// import { signUpUser } from '../../store/thunk';
 // COMPONENTS
 import Input from '../../components/Input';
 // STYLES
@@ -18,12 +15,12 @@ function SignUp() {
     email: '',
     password: '',
   });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const signUpInputs = [
     {
       id: 1,
-      name: 'Username',
+      name: 'username',
+      title: 'Username',
       type: 'text',
       required: true,
       errorMessage: 'Username should be 3-16 characters and should not include any special characters',
@@ -31,14 +28,16 @@ function SignUp() {
     },
     {
       id: 2,
-      name: 'Email',
+      name: 'email',
+      title: 'Email',
       type: 'email',
       required: true,
       errorMessage: 'It should be a valid email address',
     },
     {
       id: 3,
-      name: 'Password',
+      name: 'password',
+      title: 'Password',
       type: 'password',
       required: true,
       errorMessage: 'Password should be 8-20 characters and include at least 1 letter, 1 number, and 1 special character',
@@ -49,12 +48,13 @@ function SignUp() {
   // EVENTS
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signUpUser(signUpForm.email, signUpForm.password, signUpForm.username));
-    navigate('/');
+    // dispatch(signUpUser(signUpForm.email, signUpForm.password, signUpForm.username));
+    console.log(signUpForm.email, signUpForm.password, signUpForm.username);
   };
 
   const onChange = (e) => {
-    setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
+    setSignUpForm((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
+    console.table(signUpForm.email);
   };
 
   return (

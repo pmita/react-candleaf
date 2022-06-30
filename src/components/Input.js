@@ -6,8 +6,9 @@ import './Input.scss';
 
 function Input({
   type,
-  name,
+  title,
   onChange,
+  errorMessage,
   ...inputProps
 }) {
   // STATE & VARIABLES
@@ -20,7 +21,7 @@ function Input({
   return (
     <label>
       <span>
-        {name}
+        {title}
         :
       </span>
       <input
@@ -30,19 +31,22 @@ function Input({
         focused={isFocused.toString()}
         {...inputProps}
       />
-      <p className="input-error">{inputProps.errorMessage}</p>
+      <p className="input-error">{errorMessage}</p>
     </label>
   );
 }
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  title: PropTypes.string,
   onChange: PropTypes.func,
+  errorMessage: PropTypes.string,
 };
 
 Input.defaultProps = {
+  title: '',
   onChange: () => {},
+  errorMessage: '',
 };
 
 export default Input;
