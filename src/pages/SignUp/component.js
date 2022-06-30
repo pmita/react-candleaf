@@ -1,27 +1,60 @@
 /* eslint-disable no-console */
-/* eslint-disable jsx-a11y/label-has-associated-control */
+
 import React, { useState } from 'react';
+// ROUTER
+import { useNavigate } from 'react-router-dom';
 // REDUX
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { signUpUser } from '../../store/thunk';
-// ROUTER
+// COMPONENTS
+import Input from '../../components/Input';
 // STYLES
 import './style.scss';
 
 function SignUp() {
   // STATE & VARIABLES
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [signUpForm, setSignUpForm] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const signUpInputs = [
+    {
+      id: 1,
+      name: 'Username',
+      type: 'text',
+      required: true,
+      errorMessage: 'Username should be 3-16 characters and should not include any special characters',
+      pattern: '^[A-Za-z0-9]{3,16}$',
+    },
+    {
+      id: 2,
+      name: 'Email',
+      type: 'email',
+      required: true,
+      errorMessage: 'It should be a valid email address',
+    },
+    {
+      id: 3,
+      name: 'Password',
+      type: 'password',
+      required: true,
+      errorMessage: 'Password should be 8-20 characters and include at least 1 letter, 1 number, and 1 special character',
+      pattern: '^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$',
+    },
+  ];
 
   // EVENTS
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signUpUser(email, password, username));
+    dispatch(signUpUser(signUpForm.email, signUpForm.password, signUpForm.username));
     navigate('/');
+  };
+
+  const onChange = (e) => {
+    setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
   };
 
   return (
@@ -30,33 +63,14 @@ function SignUp() {
       <div className="signup-content">
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
-          <label>
-            <span>Username</span>
-            <input
-              required
-              type="username"
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
+          {signUpInputs.map((input) => (
+            <Input
+              key={input.id}
+              onChange={onChange}
+              value={signUpForm[input.name]}
+              {...input}
             />
-          </label>
-          <label>
-            <span>Email</span>
-            <input
-              required
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </label>
-          <label>
-            <span>Password</span>
-            <input
-              required
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </label>
+          ))}
           <button className="btn primary" type="submit">Sign Up</button>
         </form>
       </div>
