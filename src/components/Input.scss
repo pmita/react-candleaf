@@ -1,0 +1,16 @@
+@import '../assets/styles/base/variables';
+@import '../assets/styles/functions/mixins';
+
+label{
+    @include flex(column, center, stretch);
+    margin: 1rem 0;
+}
+
+.input-error{
+    display: none;
+    color: $error;
+}
+
+input:invalid[focused='true'] ~ .input-error{
+    display: block;
+}

@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 // REDUX
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Input from '../../components/Input';
 import { signInUser } from '../../store/thunk';
 // STYLES
 import './style.scss';
@@ -10,6 +11,7 @@ function SignIn() {
   // STATE & VARIABLES
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { isPending, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   // EVENTS
@@ -24,25 +26,28 @@ function SignIn() {
       <div className="signin-content">
         <h2>Sign In</h2>
         <form onSubmit={handleSubmit}>
-          <label>
-            <span>Email</span>
-            <input
-              required
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </label>
-          <label>
-            <span>Password</span>
-            <input
-              required
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </label>
-          <button className="btn primary" type="submit">Sign In</button>
+          <Input
+            type="email"
+            name="email"
+            label="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            errorMessage="It should be a valid email address"
+            value={email}
+            required
+          />
+          <Input
+            type="password"
+            name="password"
+            label="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            errorMessage="Password should be 8-20 characters and include at least 1 letter, 1 number, and 1 special character"
+            pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+            value={password}
+            required
+          />
+          {error && <p className="error">{error}</p>}
+          {!isPending && <button className="btn primary" type="submit">Sign In</button>}
+          {isPending && <button className="btn primary" type="submit" disabled>Loading...</button>}
         </form>
       </div>
     </div>

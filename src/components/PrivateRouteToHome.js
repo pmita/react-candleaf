@@ -9,7 +9,14 @@ function PrivateRouteToHome({ user }) {
 }
 
 PrivateRouteToHome.propTypes = {
-  user: PropTypes.bool.isRequired,
+  user: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object,
+  ]),
+};
+
+PrivateRouteToHome.defaultProps = {
+  user: null,
 };
 
 export default PrivateRouteToHome;
