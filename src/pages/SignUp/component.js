@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 // REDUX
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from '../../store/thunk';
 // COMPONENTS
 import Input from '../../components/Input';
@@ -13,6 +13,7 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { isPending, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   // EVENTS
@@ -56,7 +57,9 @@ function SignUp() {
             value={password}
             required
           />
-          <button className="btn primary" type="submit">Sign Up</button>
+          {error && <p className="error">{error}</p>}
+          {!isPending && <button className="btn primary" type="submit">Sign Up</button>}
+          {isPending && <button className="btn primary" type="submit" disabled>Loading...</button>}
         </form>
       </div>
     </div>
