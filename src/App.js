@@ -16,7 +16,6 @@ import OurStory from './pages/OurStory';
 import ContactUs from './pages/ContactUs';
 import SignIn from './pages/SignIn/component';
 import SignUp from './pages/SignUp/component';
-import Random from './pages/random/Random';
 
 function App() {
   // STATE & VARIABLES
@@ -48,7 +47,6 @@ function App() {
             <Route path="/signup" element={<PrivateRouteToHome user={user} />}>
               <Route path="/signup" element={<SignUp />} />
             </Route>
-            <Route path="/random" element={<Random />} />
           </Routes>
         </>
       )}
