@@ -6,7 +6,8 @@ import './Input.scss';
 
 function Input({
   type,
-  title,
+  name,
+  label,
   onChange,
   errorMessage,
   ...inputProps
@@ -18,33 +19,39 @@ function Input({
   const handleFocus = () => {
     setIsFocused(true);
   };
+
   return (
-    <label>
-      <span>
-        {title}
-        :
-      </span>
-      <input
-        type={type}
-        onChange={onChange}
-        onBlur={handleFocus}
-        focused={isFocused.toString()}
-        {...inputProps}
-      />
-      <p className="input-error">{errorMessage}</p>
-    </label>
+    <div>
+      <label htmlFor={name}>
+        <span>
+          {label}
+          :
+        </span>
+        <input
+          type={type}
+          onChange={onChange}
+          onBlur={handleFocus}
+          focused={isFocused.toString()}
+          {...inputProps}
+          id={name}
+        />
+        <p className="input-error">{errorMessage}</p>
+      </label>
+    </div>
   );
 }
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
-  title: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string,
   onChange: PropTypes.func,
   errorMessage: PropTypes.string,
 };
 
 Input.defaultProps = {
-  title: '',
+  label: '',
+  name: '',
   onChange: () => {},
   errorMessage: '',
 };
