@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 // REDUX
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../components/Input';
 import { signInUser } from '../../store/thunk';
 // STYLES
@@ -11,6 +11,7 @@ function SignIn() {
   // STATE & VARIABLES
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { isPending, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   // EVENTS
@@ -44,7 +45,9 @@ function SignIn() {
             value={password}
             required
           />
-          <button className="btn primary" type="submit">Sign In</button>
+          {error && <p className="error">{error}</p>}
+          {!isPending && <button className="btn primary" type="submit">Sign In</button>}
+          {isPending && <button className="btn primary" type="submit" disabled>Loading...</button>}
         </form>
       </div>
     </div>
