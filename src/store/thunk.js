@@ -1,6 +1,6 @@
 // FIREBASE
 import { auth, firestore } from '../firebase/config';
-// ACTIONS
+// AUTHENTICATION ACTIONS
 import {
   signUpInit,
   signUpFailure,
@@ -12,11 +12,18 @@ import {
   signInFailure,
   signInSuccess,
 } from './actions/authActions';
+// PRODUCTS ACTIONS
 import {
   getProductsInit,
   getProductsFailure,
   getProductsSucess,
 } from './actions/productsActions';
+// PRODUCT ACTIONS
+import {
+  getProductInit,
+  getProductFailure,
+  getProductSuccess,
+} from './actions/productActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
   // reset state
@@ -77,7 +84,7 @@ const getProducts = () => async (dispatch) => {
   try {
     firestore.collection('products').onSnapshot((snapshot) => {
       if (snapshot.empty) {
-        dispatch(getProductsFailure('Could not fing any items right now'));
+        dispatch(getProductsFailure('Could not find any items right now'));
         throw new Error('Could not fing any items right now');
       } else {
         const results = [];
@@ -92,9 +99,29 @@ const getProducts = () => async (dispatch) => {
   }
 };
 
+// -------------- PRODUCT RELATED FUNCTIONS
+const getProduct = (id) => async (dispatch) => {
+  // init firestore fetching
+  dispatch(getProductInit());
+
+  try {
+    firestore.collection('products').doc(id).onSnapshot((snapshot) => {
+      if (!snapshot.exists) {
+        dispatch(getProductFailure('Could not find the item right now'));
+        throw new Error('Could not find the item right now');
+      } else {
+        dispatch(getProductSuccess({ ...snapshot.data(), id: snapshot.id }));
+      }
+    });
+  } catch (err) {
+    dispatch(getProductFailure(err.message));
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
   signInUser,
   getProducts,
+  getProduct,
 };
