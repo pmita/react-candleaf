@@ -1,5 +1,5 @@
 // FIREBASE
-import { auth } from '../firebase/config';
+import { auth, firestore } from '../firebase/config';
 // ACTIONS
 import {
   signUpInit,
@@ -12,6 +12,11 @@ import {
   signInFailure,
   signInSuccess,
 } from './actions/authActions';
+import {
+  getProductsInit,
+  getProductsFailure,
+  getProductsSucess,
+} from './actions/productsActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
   // reset state
@@ -64,9 +69,33 @@ const signInUser = (email, password) => async (dispatch) => {
   }
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// -------------- PRODUCTS RELATED FUNCTIONS
+const getProducts = () => async (dispatch) => {
+  // init firebase connection
+  dispatch(getProductsInit());
+
+  try {
+    // await getCollections();
+    firestore.collection('products').onSnapshot((snapshot) => {
+      if (snapshot.empty) {
+        dispatch(getProductsFailure('Could not fing any items right now'));
+        throw new Error('Could not fing any items right now');
+      } else {
+        const results = [];
+        snapshot.docs.forEach((doc) => {
+          results.push({ ...doc.data(), id: doc.id });
+        });
+        dispatch(getProductsSucess(results));
+      }
+    });
+  } catch (err) {
+    dispatch(getProductsFailure(err.message));
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
   signInUser,
+  getProducts,
 };
