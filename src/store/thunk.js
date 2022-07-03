@@ -1,5 +1,7 @@
 // FIREBASE
 import { auth } from '../firebase/config';
+// FUNCTIONS
+import getCollections from '../common/getCollections';
 // ACTIONS
 import {
   signUpInit,
@@ -12,6 +14,11 @@ import {
   signInFailure,
   signInSuccess,
 } from './actions/authActions';
+import {
+  getProductsInit,
+  getProductsFailure,
+  getProductsSucess,
+} from './actions/productsActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
   // reset state
@@ -64,9 +71,25 @@ const signInUser = (email, password) => async (dispatch) => {
   }
 };
 
-// eslint-disable-next-line import/prefer-default-export
+// -------------- PRODUCTS RELATED FUNCTIONS
+const getProducts = (collection) => async (dispatch) => {
+  dispatch(getProductsInit());
+
+  try {
+    const docs = await getCollections(collection);
+    if (!docs) {
+      throw new Error('Could not fetch data right now');
+    } else {
+      dispatch(getProductsSucess(docs));
+    }
+  } catch (err) {
+    dispatch(getProductsFailure(err.message));
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
   signInUser,
+  getProducts,
 };
