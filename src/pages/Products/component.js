@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../store/thunk';
 // COMPONENTS
-import ProductCard from '../../components/ProductsList.js/component';
+import ProductCard from '../../components/ProductsCard.js/component';
 // ASSETS
 import ProductsBanner from '../../assets/images/banner-image.jpg';
 // STYLES
@@ -24,11 +24,11 @@ function Products() {
       <div className="products-banner">
         <img src={ProductsBanner} alt="cosmetic background" />
       </div>
+
+      <h2 className="products-pageTitle">Our Products</h2>
+
       {error && <p>{error}</p>}
       {isPending && <p>Loading Products...</p>}
-
-      <h2>Our Products</h2>
-
       <div className="products-content">
         {products && products.map((product) => (
           <ProductCard
