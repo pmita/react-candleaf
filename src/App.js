@@ -11,6 +11,7 @@ import Navigation from './layouts/Navigation/component';
 import PrivateRouteToHome from './components/PrivateRouteToHome';
 // PAGES
 import Home from './pages/Home';
+import Product from './pages/Product/component';
 import Products from './pages/Products';
 import OurStory from './pages/OurStory';
 import ContactUs from './pages/ContactUs';
@@ -38,7 +39,8 @@ function App() {
           <Navigation />
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/products" exact element={<Products />} />
+            <Route path="/products/:id" element={<Product />} />
             <Route path="/our-story" element={<OurStory />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/signin" element={<PrivateRouteToHome user={user} />}>

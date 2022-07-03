@@ -3,11 +3,12 @@ import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import colorReducer from './colorReducer';
 import productsReducer from './productsReducer';
+import productReducer from './productReducer';
 
 const allReducers = combineReducers({
   auth: authReducer,
   products: productsReducer,
-  product: productsReducer,
+  product: productReducer,
   color: colorReducer,
 });
 
