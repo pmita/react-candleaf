@@ -24,11 +24,14 @@ function Products() {
       </div>
       {error && <p>{error}</p>}
       {isPending && <p>Loading Products...</p>}
+
+      <h2>Our Products</h2>
+
       <div className="products-content">
         {products && products.map((product) => (
           <div className="product-card" key={product.id}>
             <img src={product.thumbnail} alt="product" />
-            <h2 className="product-title">{product.title}</h2>
+            <h4 className="product-title">{product.title}</h4>
             <span className="product-price">
               £
               {product.price}
