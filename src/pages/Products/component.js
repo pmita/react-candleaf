@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 // REDUX
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../../store/thunk';
+// COMPONENTS
+import ProductCard from '../../components/ProductsList.js/component';
 // ASSETS
 import ProductsBanner from '../../assets/images/banner-image.jpg';
 // STYLES
@@ -29,16 +31,13 @@ function Products() {
 
       <div className="products-content">
         {products && products.map((product) => (
-          <div className="product-card" key={product.id}>
-            <img src={product.thumbnail} alt="product" />
-            <h4 className="product-title">{product.title}</h4>
-            <span className="product-price">
-              £
-              {product.price}
-            </span>
-          </div>
+          <ProductCard
+            key={product.id}
+            {...product}
+          />
         ))}
       </div>
+
     </div>
   );
 }
