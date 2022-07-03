@@ -10,11 +10,13 @@ function ProductCard(props) {
   return (
     <div className="product-card">
       <img src={thumbnail} alt="product" />
-      <h4 className="product-title">{title}</h4>
-      <span className="product-price">
-        £
-        {price}
-      </span>
+      <div className="product-details">
+        <h4 className="product-title">{title}</h4>
+        <span className="product-price">
+          £
+          {price}
+        </span>
+      </div>
     </div>
 
   );

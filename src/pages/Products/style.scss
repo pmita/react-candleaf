@@ -17,9 +17,12 @@
 }
 
 .products-pageTitle{
-    padding: 5rem 0;
+    padding: 2.5rem 0;
 }
 
 .products-content{
-    @include grid(repeat(auto-fill, minmax(305px, 1fr)), 450px, 1rem);  
+    min-height: calc(100vh - 30vh);
+    width: 90%;
+    padding: 2.5rem 0;
+    @include grid(repeat(auto-fit, minmax(305px, 1fr)), 450px, 1rem);  
 }
