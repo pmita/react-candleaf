@@ -75,7 +75,6 @@ const getProducts = () => async (dispatch) => {
   dispatch(getProductsInit());
 
   try {
-    // await getCollections();
     firestore.collection('products').onSnapshot((snapshot) => {
       if (snapshot.empty) {
         dispatch(getProductsFailure('Could not fing any items right now'));
