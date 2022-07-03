@@ -1,6 +1,5 @@
 // FIREBASE
 import { auth, firestore } from '../firebase/config';
-// HOOKS
 // ACTIONS
 import {
   signUpInit,
@@ -72,22 +71,23 @@ const signInUser = (email, password) => async (dispatch) => {
 
 // -------------- PRODUCTS RELATED FUNCTIONS
 const getProducts = () => async (dispatch) => {
-  // FUNCTIONS
-  const getCollections = async () => {
-    firestore.collection('products').onSnapshot((snapshot) => {
-      const results = [];
-      snapshot.docs.forEach((doc) => {
-        results.push({ ...doc.data(), id: doc.id });
-      });
-      dispatch(getProductsSucess(results));
-    });
-  };
-
   // init firebase connection
   dispatch(getProductsInit());
 
   try {
-    await getCollections();
+    // await getCollections();
+    firestore.collection('users').onSnapshot((snapshot) => {
+      if (snapshot.empty) {
+        dispatch(getProductsFailure('Could not fing any items right now'));
+        throw new Error('Could not fing any items right now');
+      } else {
+        const results = [];
+        snapshot.docs.forEach((doc) => {
+          results.push({ ...doc.data(), id: doc.id });
+        });
+        dispatch(getProductsSucess(results));
+      }
+    });
   } catch (err) {
     dispatch(getProductsFailure(err.message));
   }
