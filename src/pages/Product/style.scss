@@ -3,17 +3,17 @@
 
 .product-page{
     width: 100%;
-    min-height: 50vh;
     background-color: $grey;
-    @include flex(row, center, center);
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(650px, 1fr));
+    grid-auto-rows: 550px;
 }
 
 .product-pageLeft{
-    flex: 1 1 50rem;
     width: 100%;
     height: 100%;
     padding: 2rem;
+    @include flex(row, center, center);
     img{
         height: 100%;
         width: 100%;
@@ -22,9 +22,8 @@
 }
 
 .product-pageRight{
-    flex: 1 1 50rem;
-    padding: 2rem;
-    @include flex(column, center, stretch);
+    padding: 5rem;
+    @include flex(column, flex-start, stretch);
 
     hr{
         max-width: 80%;
@@ -37,5 +36,19 @@
 .product-description{
     p{
         padding: 1rem 0;
+        max-width: 80%;
+    }
+}
+
+.product-keyFeatures{
+    padding: 1rem;
+}
+
+.product-purchase{
+    form{
+        width: 80%;
+        label{
+            @include flex(row, space-between, center);
+        }
     }
 }

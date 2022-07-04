@@ -1,13 +1,19 @@
 @import '../../assets/styles/functions/mixins';
+@import '../../assets/styles/base/variables';
 
 .product-card{
     width: 100%;
     height: 100%;
     @include flex(column, flex-start, flex-start);
+    position: relative;
+    overflow-y: hidden;
     img{
         height: 85%;
         width: 100%;
         object-fit: cover;
+    }
+    &:hover .product-actions{
+        transform: translateY(-100%);
     }
 }
 
@@ -17,4 +23,15 @@
     h4{
         padding: 1rem 0;
     }
+}
+
+.product-actions{
+    background: $white;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: $transition;
+    @include flex(column, center, stretch);
+    gap: 1rem;
 }
