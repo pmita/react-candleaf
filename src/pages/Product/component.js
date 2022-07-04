@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 // REDUX
 import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../store/thunk';
+// COMPONENTS
+import ProductFeature from './ProductFeature';
 // STYLES
 import './style.scss';
 
@@ -58,15 +60,18 @@ function Product() {
                 <p>{product.description}</p>
               </div>
 
-              {product.key_features && (
-                <div className="product-keyFeatures">
-                  {product.key_features.map((feature) => (
-                    <li className="feature-item" key={feature}>
-                      {feature}
-                    </li>
-                  ))}
-                </div>
-              )}
+              <div className="product-keyFeatures">
+                {product.key_features
+                  ? (
+                    product.key_features.map((feature) => (
+                      <ProductFeature
+                        key={feature}
+                        feature={feature}
+                      />
+                    ))
+                  )
+                  : (<p>This is our standart line of products</p>)}
+              </div>
 
               <div className="product-purchase">
                 <form onSubmit={handleSubmit}>
