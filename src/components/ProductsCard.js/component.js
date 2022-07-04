@@ -1,8 +1,11 @@
 import React from 'react';
 // ROUTER
 import { Link } from 'react-router-dom';
-// PROP TYPES
+// REDUX
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addItemToCart } from '../../store/thunk';
+// PROP TYPES
 // STYLES
 import './style.scss';
 
@@ -11,6 +14,16 @@ function ProductCard(props) {
   const {
     thumbnail, title, price, id,
   } = props;
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  // EVENTS
+  const handleClick = () => {
+    if (user) {
+      dispatch(addItemToCart(user.uid, id, { ...props, quantity: 1 }));
+    }
+  };
+
   return (
     <div className="product-card">
       <img src={thumbnail} alt="product" />
@@ -27,7 +40,7 @@ function ProductCard(props) {
         </button> */}
       </div>
       <div className="product-actions">
-        <button className="btn primary" type="button">Add to Cart</button>
+        <button className="btn primary" type="button" onClick={handleClick}>Add to Cart</button>
         <button className="btn secondary" type="button">
           <Link to={`/products/${id}`}>
             Check it Out

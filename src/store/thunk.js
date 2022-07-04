@@ -130,8 +130,8 @@ const getCartItems = (userId) => async (dispatch) => {
   try {
     firestore.collection('users').doc(userId).collection('cart').onSnapshot((snapshot) => {
       if (snapshot.empty) {
-        dispatch({ type: 'GET_CART_FAILURE', payload: 'Could not fetch items from cart right now' });
-        throw new Error('Could not fetch items from cart right now');
+        dispatch({ type: 'GET_CART_FAILURE', payload: 'Empty Cart' });
+        throw new Error('Empty Cart');
       } else {
         const results = [];
         snapshot.docs.forEach((doc) => {
@@ -145,6 +145,19 @@ const getCartItems = (userId) => async (dispatch) => {
   }
 };
 
+const addItemToCart = (userId, itemId, item) => async (dispatch) => {
+  dispatch({ type: 'ADD_ITEM_TO_CART_INIT' });
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .set({ ...item });
+
+    dispatch({ type: 'ADD_ITEM_TO_CART_SUCCESS', payload: item });
+  } catch (err) {
+    dispatch({ type: 'ADD_ITEM_TO_CART_FAILURE', payload: err.message });
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
@@ -152,4 +165,5 @@ export {
   getProducts,
   getProduct,
   getCartItems,
+  addItemToCart,
 };
