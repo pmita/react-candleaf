@@ -33,14 +33,11 @@ function ProductCard(props) {
           £
           {price}
         </span>
-        {/* <button className="btn primary" type="button">
-          <Link to={`/products/${id}`}>
-            Check it Out
-          </Link>
-        </button> */}
       </div>
       <div className="product-actions">
-        <button className="btn primary" type="button" onClick={handleClick}>Add to Cart</button>
+        {user
+          ? (<button className="btn primary" type="button" onClick={handleClick}>Add to Cart</button>)
+          : (<button className="btn primary" type="button" onClick={handleClick} disabled>Add to Cart</button>)}
         <button className="btn secondary" type="button">
           <Link to={`/products/${id}`}>
             Check it Out
