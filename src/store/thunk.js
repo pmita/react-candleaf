@@ -40,6 +40,10 @@ const signUpUser = (email, password, username) => async (dispatch) => {
       displayName: username,
     });
 
+    await firestore.collection('users').doc(response.user.uid).set({
+      displayName: username,
+    });
+
     dispatch(signUpSuccess(response.user));
   } catch (err) {
     dispatch(signUpFailure(err.message));
@@ -118,10 +122,34 @@ const getProduct = (id) => async (dispatch) => {
   }
 };
 
+// -------------- CART RELATED FUNCTIONS
+const getCartItems = (userId) => async (dispatch) => {
+  // init firestore fetching
+  dispatch({ type: 'GET_CART_INIT' });
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').onSnapshot((snapshot) => {
+      if (snapshot.empty) {
+        dispatch({ type: 'GET_CART_FAILURE', payload: 'Could not fetch items from cart right now' });
+        throw new Error('Could not fetch items from cart right now');
+      } else {
+        const results = [];
+        snapshot.docs.forEach((doc) => {
+          results.push({ ...doc.data() });
+        });
+        dispatch({ type: 'GET_CART_SUCCESS', payload: results });
+      }
+    });
+  } catch (err) {
+    dispatch({ type: 'GET_CART_FAILURE', payload: err.message });
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
   signInUser,
   getProducts,
   getProduct,
+  getCartItems,
 };

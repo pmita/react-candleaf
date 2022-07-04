@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 // REDUCERS
 import authReducer from './authReducer';
-import colorReducer from './colorReducer';
 import productsReducer from './productsReducer';
 import productReducer from './productReducer';
+import cartReducer from './cartReducer';
 
 const allReducers = combineReducers({
   auth: authReducer,
   products: productsReducer,
   product: productReducer,
-  color: colorReducer,
+  cart: cartReducer,
 });
 
 export default allReducers;
