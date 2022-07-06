@@ -24,6 +24,18 @@ import {
   getProductFailure,
   getProductSuccess,
 } from './actions/productActions';
+// CART ACTIONS
+import {
+  getCartInit,
+  getCartSuccess,
+  getCartFailure,
+  addItemInit,
+  addItemSuccess,
+  addItemFailure,
+  removeItemInit,
+  removeItemSuccess,
+  removeItemFailure,
+} from './actions/cartActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
   // reset state
@@ -125,48 +137,48 @@ const getProduct = (id) => async (dispatch) => {
 // -------------- CART RELATED FUNCTIONS
 const getCartItems = (userId) => async (dispatch) => {
   // init firestore fetching
-  dispatch({ type: 'GET_CART_INIT' });
+  dispatch(getCartInit());
 
   try {
     firestore.collection('users').doc(userId).collection('cart').onSnapshot((snapshot) => {
       if (snapshot.empty) {
-        dispatch({ type: 'GET_CART_FAILURE', payload: 'Empty Cart' });
+        dispatch(getCartFailure('Empty Cart'));
         throw new Error('Empty Cart');
       } else {
         const results = [];
         snapshot.docs.forEach((doc) => {
           results.push({ ...doc.data() });
         });
-        dispatch({ type: 'GET_CART_SUCCESS', payload: results });
+        dispatch(getCartSuccess(results));
       }
     });
   } catch (err) {
-    dispatch({ type: 'GET_CART_FAILURE', payload: err.message });
+    dispatch(getCartFailure(err.message));
   }
 };
 
 const addItemToCart = (userId, itemId, item) => async (dispatch) => {
-  dispatch({ type: 'ADD_ITEM_TO_CART_INIT' });
+  dispatch(addItemInit());
 
   try {
     firestore.collection('users').doc(userId).collection('cart').doc(itemId)
       .set({ ...item });
 
-    dispatch({ type: 'ADD_ITEM_TO_CART_SUCCESS', payload: item });
+    dispatch(addItemSuccess(item));
   } catch (err) {
-    dispatch({ type: 'ADD_ITEM_TO_CART_FAILURE', payload: err.message });
+    dispatch(addItemFailure(err.message));
   }
 };
 
 const removeItemFromCart = (userId, itemId) => async (dispatch) => {
-  dispatch({ type: 'REMOVE_CART_ITEM_INIT' });
+  dispatch(removeItemInit());
 
   try {
     firestore.collection('users').doc(userId).collection('cart').doc(itemId)
       .delete();
-    dispatch({ type: 'REMOVE_CART_ITEM_SUCCESS' });
+    dispatch(removeItemSuccess());
   } catch (err) {
-    dispatch({ type: 'REMOVE_CART_ITEM_FAILURE', payload: err.message });
+    dispatch(removeItemFailure(err.message));
   }
 };
 
