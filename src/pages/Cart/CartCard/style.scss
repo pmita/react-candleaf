@@ -1,0 +1,29 @@
+@import '../../../assets/styles/functions/mixins';
+
+.cart-item{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+}
+
+.cart-itemThumbnail{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cart-itemDetails,
+.cart-itemQuantity,
+.cart-itemTotal{
+    @include flex(column, center, center);
+}
+
+.cart-itemQuantity{
+    .remove-item{
+        text-decoration: underline;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

@@ -158,6 +158,18 @@ const addItemToCart = (userId, itemId, item) => async (dispatch) => {
   }
 };
 
+const removeItemFromCart = (userId, itemId) => async (dispatch) => {
+  dispatch({ type: 'REMOVE_CART_ITEM_INIT' });
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .delete();
+    dispatch({ type: 'REMOVE_CART_ITEM_SUCCESS' });
+  } catch (err) {
+    dispatch({ type: 'REMOVE_CART_ITEM_FAILURE', payload: err.message });
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
@@ -166,4 +178,5 @@ export {
   getProduct,
   getCartItems,
   addItemToCart,
+  removeItemFromCart,
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 // ROUTER
 import { Link } from 'react-router-dom';
+// PROP TYPES
+import PropTypes from 'prop-types';
 // REDUX
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { addItemToCart } from '../../store/thunk';
-// PROP TYPES
 // STYLES
 import './style.scss';
 
@@ -36,7 +36,11 @@ function ProductCard(props) {
       </div>
       <div className="product-actions">
         {user
-          ? (<button className="btn primary" type="button" onClick={handleClick}>Add to Cart</button>)
+          ? (
+            <button className="btn primary" type="button" onClick={handleClick}>
+              Add to Cart
+            </button>
+          )
           : (<button className="btn primary" type="button" onClick={handleClick} disabled>Add to Cart</button>)}
         <button className="btn secondary" type="button">
           <Link to={`/products/${id}`}>

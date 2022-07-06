@@ -1,0 +1,19 @@
+@import '../../assets/styles/functions/mixins';
+@import '../../assets/styles/base/variables';
+
+.cart-page{
+    width: 100%;
+    min-height: 90vh;
+    @include flex(column, flex-start, center);
+    h1{
+        padding: 2.5rem 0;
+    }
+}
+
+.cart-content{
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 1rem;
+}
