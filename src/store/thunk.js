@@ -24,6 +24,18 @@ import {
   getProductFailure,
   getProductSuccess,
 } from './actions/productActions';
+// CART ACTIONS
+import {
+  getCartInit,
+  getCartSuccess,
+  getCartFailure,
+  addItemInit,
+  addItemSuccess,
+  addItemFailure,
+  removeItemInit,
+  removeItemSuccess,
+  removeItemFailure,
+} from './actions/cartActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
   // reset state
@@ -37,6 +49,10 @@ const signUpUser = (email, password, username) => async (dispatch) => {
     }
 
     await response.user.updateProfile({
+      displayName: username,
+    });
+
+    await firestore.collection('users').doc(response.user.uid).set({
       displayName: username,
     });
 
@@ -118,10 +134,61 @@ const getProduct = (id) => async (dispatch) => {
   }
 };
 
+// -------------- CART RELATED FUNCTIONS
+const getCartItems = (userId) => async (dispatch) => {
+  // init firestore fetching
+  dispatch(getCartInit());
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').onSnapshot((snapshot) => {
+      if (snapshot.empty) {
+        dispatch(getCartFailure('Empty Cart'));
+        throw new Error('Empty Cart');
+      } else {
+        const results = [];
+        snapshot.docs.forEach((doc) => {
+          results.push({ ...doc.data() });
+        });
+        dispatch(getCartSuccess(results));
+      }
+    });
+  } catch (err) {
+    dispatch(getCartFailure(err.message));
+  }
+};
+
+const addItemToCart = (userId, itemId, item) => async (dispatch) => {
+  dispatch(addItemInit());
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .set({ ...item });
+
+    dispatch(addItemSuccess(item));
+  } catch (err) {
+    dispatch(addItemFailure(err.message));
+  }
+};
+
+const removeItemFromCart = (userId, itemId) => async (dispatch) => {
+  dispatch(removeItemInit());
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .delete();
+    dispatch(removeItemSuccess());
+  } catch (err) {
+    dispatch(removeItemFailure(err.message));
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
   signInUser,
   getProducts,
   getProduct,
+  getCartItems,
+  addItemToCart,
+  removeItemFromCart,
 };

@@ -34,4 +34,25 @@
     transition: $transition;
     @include flex(column, center, stretch);
     gap: 1rem;
+    button{
+        position: relative;
+        &:disabled{
+            cursor: not-allowed;
+            &::after{
+                content: 'You need to be signed in to add to cart';
+                background-color: $white;
+                position: absolute;
+                width: 100%;
+                top: -100%;
+                right: 0;
+                display: none;
+                transition: $transition;
+            }
+            &:hover{
+                &::after{
+                    display: block;
+                }
+            }
+        }
+    }
 }

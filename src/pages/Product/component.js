@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 // REDUX
 import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../../store/thunk';
+import { getProduct, addItemToCart } from '../../store/thunk';
 // COMPONENTS
 import ProductFeature from './ProductFeature';
 // STYLES
@@ -13,13 +13,14 @@ function Product() {
   // STATE & VARIABLES
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const { product, isPending, error } = useSelector((state) => state.product);
   const [itemQnt, setItemQnt] = useState(1);
 
   // EVENTS
   const handleSubmit = (e) => {
     e.preventDefault();
-    setItemQnt(1);
+    dispatch(addItemToCart(user.uid, id, { ...product, quantity: itemQnt }));
   };
 
   const handleChange = (e) => {
@@ -34,7 +35,7 @@ function Product() {
   // useEFFECT
   useEffect(() => {
     dispatch(getProduct(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <>
@@ -85,8 +86,8 @@ function Product() {
                         required
                       />
                     </div>
-                    <button className="btn primary" type="button">Add to Cart</button>
                   </label>
+                  <button className="btn primary" type="submit">Add to Cart</button>
                 </form>
               </div>
             </div>

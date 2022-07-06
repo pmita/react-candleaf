@@ -3,6 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // PROP TYPES
 import PropTypes from 'prop-types';
+// REDUX
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemToCart } from '../../store/thunk';
 // STYLES
 import './style.scss';
 
@@ -11,6 +14,16 @@ function ProductCard(props) {
   const {
     thumbnail, title, price, id,
   } = props;
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  // EVENTS
+  const handleClick = () => {
+    if (user) {
+      dispatch(addItemToCart(user.uid, id, { ...props, quantity: 1 }));
+    }
+  };
+
   return (
     <div className="product-card">
       <img src={thumbnail} alt="product" />
@@ -20,14 +33,15 @@ function ProductCard(props) {
           £
           {price}
         </span>
-        {/* <button className="btn primary" type="button">
-          <Link to={`/products/${id}`}>
-            Check it Out
-          </Link>
-        </button> */}
       </div>
       <div className="product-actions">
-        <button className="btn primary" type="button">Add to Cart</button>
+        {user
+          ? (
+            <button className="btn primary" type="button" onClick={handleClick}>
+              Add to Cart
+            </button>
+          )
+          : (<button className="btn primary" type="button" onClick={handleClick} disabled>Add to Cart</button>)}
         <button className="btn secondary" type="button">
           <Link to={`/products/${id}`}>
             Check it Out

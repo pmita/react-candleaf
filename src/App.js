@@ -17,6 +17,7 @@ import OurStory from './pages/OurStory';
 import ContactUs from './pages/ContactUs';
 import SignIn from './pages/SignIn/component';
 import SignUp from './pages/SignUp/component';
+import Cart from './pages/Cart/component';
 
 function App() {
   // STATE & VARIABLES
@@ -41,6 +42,7 @@ function App() {
             <Route path="/" exact element={<Home />} />
             <Route path="/products" exact element={<Products />} />
             <Route path="/products/:id" element={<Product />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/our-story" element={<OurStory />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/signin" element={<PrivateRouteToHome user={user} />}>
