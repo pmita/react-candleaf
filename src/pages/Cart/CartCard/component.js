@@ -45,13 +45,14 @@ function CartCard({
       <div className="cart-itemQuantity">
         <h4>
           Quanity
+          {' '}
+          {quantity}
         </h4>
         <div className="actions">
           <button className="btn secondary" data-name="decrease" type="button" onClick={handleClick}>-</button>
-          <span>{quantity}</span>
+          <button className="btn remove" data-name="remove" onClick={handleClick} type="button">Remove</button>
           <button className="btn secondary" data-name="increase" type="button" onClick={handleClick}>+</button>
         </div>
-        <button className="btn remove-item" data-name="remove" onClick={handleClick} type="button">Remove</button>
       </div>
       <div className="cart-itemTotal">
         <h4>

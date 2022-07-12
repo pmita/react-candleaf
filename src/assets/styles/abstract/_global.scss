@@ -161,6 +161,16 @@
         }
       }
     }
+    &.remove{
+      background: white;
+      color: black;
+      text-decoration: underline;
+      border: none;
+      outline: none;
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
 
   

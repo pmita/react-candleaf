@@ -20,6 +20,10 @@
 }
 
 .cart-itemQuantity{
+    .actions{
+        @include flex(row, space-evenly, center);
+        gap: 0.5rem;
+    }
     .remove-item{
         text-decoration: underline;
         &:hover{
