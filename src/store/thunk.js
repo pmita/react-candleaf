@@ -182,6 +182,34 @@ const removeItemFromCart = (userId, itemId) => async (dispatch) => {
   }
 };
 
+const increaseItemQnt = (userId, itemId, newQuantity) => async (dispatch) => {
+  dispatch({ type: 'INCREASE_ITEM_QNT_INIT' });
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .update({
+        quantity: newQuantity,
+      });
+    dispatch({ type: 'INCREASE_ITEM_QNT_SUCCES' });
+  } catch (err) {
+    dispatch({ type: 'INCREASE_ITEM_QNT_FAILURE', payload: err.message });
+  }
+};
+
+const decreaseItemQnt = (userId, itemId, newQuantity) => async (dispatch) => {
+  dispatch({ type: 'DECREASE_ITEM_QNT_INIT' });
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .update({
+        quantity: newQuantity,
+      });
+    dispatch({ type: 'DECREASE_ITEM_QNT_SUCCES' });
+  } catch (err) {
+    dispatch({ type: 'DECREASE_ITEM_QNT_FAILURE', payload: err.message });
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
@@ -191,4 +219,6 @@ export {
   getCartItems,
   addItemToCart,
   removeItemFromCart,
+  increaseItemQnt,
+  decreaseItemQnt,
 };
