@@ -10,7 +10,7 @@ function Cart() {
   // STATE & VARIABLES
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, isPending, error } = useSelector((state) => state.cart);
 
   // useEFFECT
   useEffect(() => {
@@ -18,6 +18,23 @@ function Cart() {
       dispatch(getCartItems(user.uid));
     }
   }, [user, dispatch]);
+
+  if (isPending) {
+    return (
+      <div className="cart-page loading">
+        <h1>Items loading...</h1>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="cart-page error">
+        <h4>{error}</h4>
+      </div>
+    );
+  }
+
   return (
     <div className="cart-page">
       <h1>Your Shopping Cart</h1>

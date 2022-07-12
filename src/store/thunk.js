@@ -35,6 +35,12 @@ import {
   removeItemInit,
   removeItemSuccess,
   removeItemFailure,
+  increaseItemQntInit,
+  increaesItemQntSuccess,
+  increaseItemQntFailure,
+  decreaseItemQntInit,
+  decreaseItemQntSuccess,
+  decreaseItemQntFailure,
 } from './actions/cartActions';
 
 const signUpUser = (email, password, username) => async (dispatch) => {
@@ -182,6 +188,34 @@ const removeItemFromCart = (userId, itemId) => async (dispatch) => {
   }
 };
 
+const increaseItemQnt = (userId, itemId, newQuantity) => async (dispatch) => {
+  dispatch(increaseItemQntInit());
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .update({
+        quantity: newQuantity,
+      });
+    dispatch(increaesItemQntSuccess());
+  } catch (err) {
+    dispatch(increaseItemQntFailure(err.message));
+  }
+};
+
+const decreaseItemQnt = (userId, itemId, newQuantity) => async (dispatch) => {
+  dispatch(decreaseItemQntInit());
+
+  try {
+    firestore.collection('users').doc(userId).collection('cart').doc(itemId)
+      .update({
+        quantity: newQuantity,
+      });
+    dispatch(decreaseItemQntSuccess());
+  } catch (err) {
+    dispatch(decreaseItemQntFailure(err.message));
+  }
+};
+
 export {
   signUpUser,
   signOutUser,
@@ -191,4 +225,6 @@ export {
   getCartItems,
   addItemToCart,
   removeItemFromCart,
+  increaseItemQnt,
+  decreaseItemQnt,
 };
