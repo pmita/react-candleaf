@@ -47,7 +47,7 @@ function Navigation() {
       >
         <li><Link to="/products">Products</Link></li>
         <li><Link to="/our-story">Our Story</Link></li>
-        <li><Link to="/contact-us">Contact Us</Link></li>
+        <li><Link to="/cart">Cart</Link></li>
       </ul>
 
       {!user && (

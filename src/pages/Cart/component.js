@@ -19,11 +19,25 @@ function Cart() {
     }
   }, [user, dispatch]);
 
+  if (isPending) {
+    return (
+      <div className="cart-page loading">
+        <h1>Items loading...</h1>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="cart-page error">
+        <h4>{error}</h4>
+      </div>
+    );
+  }
+
   return (
     <div className="cart-page">
       <h1>Your Shopping Cart</h1>
-      {isPending && <p>Items loading...</p>}
-      {error && <p>{error}</p>}
       {cart && (
         <div className="cart-content">
           {cart.map((item) => <CartCard {...item} key={item.id} />)}

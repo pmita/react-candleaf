@@ -9,12 +9,12 @@ import { auth } from './firebase/config';
 // COMPONENTS
 import Navigation from './layouts/Navigation/component';
 import PrivateRouteToHome from './components/PrivateRouteToHome';
+import PrivateRouteToCart from './components/PrivateRouteToCart';
 // PAGES
 import Home from './pages/Home';
 import Product from './pages/Product/component';
 import Products from './pages/Products';
 import OurStory from './pages/OurStory';
-import ContactUs from './pages/ContactUs';
 import SignIn from './pages/SignIn/component';
 import SignUp from './pages/SignUp/component';
 import Cart from './pages/Cart/component';
@@ -43,8 +43,10 @@ function App() {
             <Route path="/products" exact element={<Products />} />
             <Route path="/products/:id" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<PrivateRouteToCart user={user} />}>
+              <Route path="/cart" element={<Cart />} />
+            </Route>
             <Route path="/our-story" element={<OurStory />} />
-            <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/signin" element={<PrivateRouteToHome user={user} />}>
               <Route path="/signin" element={<SignIn />} />
             </Route>
