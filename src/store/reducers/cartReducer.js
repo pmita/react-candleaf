@@ -9,6 +9,12 @@ import {
   REMOVE_CART_ITEM_INIT,
   REMOVE_CART_ITEM_SUCCESS,
   REMOVE_CART_ITEM_FAILURE,
+  INCREASE_ITEM_QNT_INIT,
+  INCREASE_ITEM_QNT_SUCCES,
+  INCREASE_ITEM_QNT_FAILURE,
+  DECREASE_ITEM_QNT_INIT,
+  DECREASE_ITEM_QNT_SUCCES,
+  DECREASE_ITEM_QNT_FAILURE,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -22,8 +28,8 @@ const cartReducer = (state = initialState, action) => {
     case GET_CART_INIT:
     case ADD_ITEM_TO_CART_INIT:
     case REMOVE_CART_ITEM_INIT:
-    case 'INCREASE_ITEM_QNT_INIT':
-    case 'DECREASE_ITEM_QNT_INIT':
+    case INCREASE_ITEM_QNT_INIT:
+    case DECREASE_ITEM_QNT_INIT:
       return { ...state, isPending: true, error: null };
     case GET_CART_FAILURE:
       return {
@@ -31,8 +37,8 @@ const cartReducer = (state = initialState, action) => {
       };
     case ADD_ITEM_TO_CART_FAILURE:
     case REMOVE_CART_ITEM_FAILURE:
-    case 'INCREASE_ITEM_QNT_FAILURE':
-    case 'DECREASE_ITEM_QNT_FAILURE':
+    case INCREASE_ITEM_QNT_FAILURE:
+    case DECREASE_ITEM_QNT_FAILURE:
       return {
         ...state, isPending: false, cart: [...state.cart], error: action.payload,
       };
@@ -45,8 +51,8 @@ const cartReducer = (state = initialState, action) => {
         ...state, isPending: false, error: null, cart: [...state.cart, action.payload],
       };
     case REMOVE_CART_ITEM_SUCCESS:
-    case 'INCREASE_ITEM_QNT_SUCCES':
-    case 'DECREASE_ITEM_QNT_SUCCES':
+    case INCREASE_ITEM_QNT_SUCCES:
+    case DECREASE_ITEM_QNT_SUCCES:
       return {
         ...state, isPending: false, error: null,
       };
